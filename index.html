@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <title>SimpleLaw Admin Help by SimpleLaw</title>
+    <title>SimpleLaw Admin Help</title>
 
     <link rel="stylesheet" href="stylesheets/styles.css">
     <link rel="stylesheet" href="stylesheets/github-light.css">
@@ -17,43 +17,73 @@
       <header>
         <h1>SimpleLaw Admin Help</h1>
         <p>Tutorials and Tools for SimpleLaw Administration</p>
-
-        <p class="view"><a href="https://github.com/SimpleLaw/SimpleAdminHelp">View the Project on GitHub <small>SimpleLaw/SimpleAdminHelp</small></a></p>
-
-
-        <ul>
-          <li><a href="https://github.com/SimpleLaw/SimpleAdminHelp/zipball/master">Download <strong>ZIP File</strong></a></li>
-          <li><a href="https://github.com/SimpleLaw/SimpleAdminHelp/tarball/master">Download <strong>TAR Ball</strong></a></li>
-          <li><a href="https://github.com/SimpleLaw/SimpleAdminHelp">View On <strong>GitHub</strong></a></li>
-        </ul>
+        <nav>
+          <a href="https://github.com/SimpleLaw/SimpleLawApp/blob/master/HELP.md">Setup</a><br>
+          <a href="#connect">Connect</a><br>
+          <a href="#add">Add Laws</a>
+        </nav>
       </header>
       <section>
-        <h3>
-<a id="designer-templates" class="anchor" href="#designer-templates" aria-hidden="true"><span class="octicon octicon-link"></span></a>Designer Templates</h3>
+        <h3><a id="connect" class="anchor" href="#connect" aria-hidden="true"><span class="octicon octicon-link"></span></a>Connecting to the SimpleLaw server with SSH</h3>
 
-<p>We've crafted some handsome templates for you to use. Go ahead and continue to layouts to browse through them. You can easily go back to edit your page before publishing. After publishing your page, you can revisit the page generator and switch to another theme. Your Page content will be preserved if it remained markdown format.</p>
+        <p><a href="http://en.wikipedia.org/wiki/Secure_Shell">SSH</a> makes it easy to access the SimpleLaw server on your PC. If you use a Unix-like operating system, such as OS X or Linux, you can <a href="https://www.digitalocean.com/community/tutorials/how-to-use-ssh-to-connect-to-a-remote-server-in-ubuntu">easily use SSH</a> from the command line. However, on Microsoft Windows, you will need an SSH client such as <a href="http://www.chiark.greenend.org.uk/~sgtatham/putty/">PuTTY</a>.<br>(<a href="https://www.digitalocean.com/community/tutorials/how-to-log-into-your-droplet-with-putty-for-windows-users">Original tutorial by Etel Sverdlov</a>)</p>
+        <p>1. <a href="http://www.chiark.greenend.org.uk/~sgtatham/putty/download.html">Download PuTTY</a></p>
+        <p>2. Start PuTTY. You will see the configuration screen, where you need to make some changes:
+          <ul>
+            <li>
+              Set the “Host Name (or IP address)” field to 45.55.235.103, the port number to 22, and the connection type to SSH.
+            </li>
+            <li>
+              Additionally, click on the sidebar entry, SSH, and select “2 only” as the preferred SSH protocol version.
+            </li>
+            <li>
+              You can save these preferences by clicking on Session in the side bar and typing a title into the Saved Sessions field.
+            </li>
+          </ul>
+        </p>
+        <p>3. Double click on the session name to connect. After PuTTY starts up, type in the root password. <strong>The password will not be visible, however it is still being entered as you type.</strong></p>
 
-<h3>
-<a id="rather-drive-stick" class="anchor" href="#rather-drive-stick" aria-hidden="true"><span class="octicon octicon-link"></span></a>Rather Drive Stick?</h3>
-
-<p>If you prefer to not use the automatic generator, push a branch named <code>gh-pages</code> to your repository to create a page manually. In addition to supporting regular HTML content, GitHub Pages support Jekyll, a simple, blog aware static site generator written by our own Tom Preston-Werner. Jekyll makes it easy to create site-wide headers and footers without having to copy them across every page. It also offers intelligent blog support and other advanced templating features.</p>
-
-<h3>
-<a id="authors-and-contributors" class="anchor" href="#authors-and-contributors" aria-hidden="true"><span class="octicon octicon-link"></span></a>Authors and Contributors</h3>
-
-<p>You can <a href="https://github.com/blog/821" class="user-mention">@mention</a> a GitHub username to generate a link to their profile. The resulting <code>&lt;a&gt;</code> element will link to the contributor's GitHub Profile. For example: In 2007, Chris Wanstrath (<a href="https://github.com/defunkt" class="user-mention">@defunkt</a>), PJ Hyett (<a href="https://github.com/pjhyett" class="user-mention">@pjhyett</a>), and Tom Preston-Werner (<a href="https://github.com/mojombo" class="user-mention">@mojombo</a>) founded GitHub.</p>
-
-<h3>
-<a id="support-or-contact" class="anchor" href="#support-or-contact" aria-hidden="true"><span class="octicon octicon-link"></span></a>Support or Contact</h3>
-
-<p>Having trouble with Pages? Check out the documentation at <a href="https://help.github.com/pages">https://help.github.com/pages</a> or contact <a href="mailto:support@github.com">support@github.com</a> and we’ll help you sort it out.</p>
+        <h3><a id="add" class="anchor" href="#add" aria-hidden="true"><span class="octicon octicon-link"></span></a>Adding Laws</h3>
+        <p>0. <a href="#connect">Connect to the SimpleLaw server using SSH</a></p>
+        <p>1. Navigate to <code>~/SimpleLawApp/Simple_Law</code></p>
+        <p>2. Execute "<code>meteor mongo</code>" to access the database</p>
+        <p>3. To add a law, complete the following template and execute. You should complete the template in a text editor and then paste it into the command line.<br><br>
+          <code>
+            db.laws.insert(
+              {
+               title : "LAW TITLE",
+               id : "LAW ID".
+               category : "CATEGORYA, CATEGORYB, ...",
+               date : "YYYY-MM-DD",
+               tags : "TAGA, TAGB, ...",
+               demographic : "DEMOGRAPHIC",
+               state : "STATE",
+               text : "BILL TEXT"
+              }
+             )
+          </code><br><br>For Example:<br><br>
+          <code>
+            db.laws.insert(
+              {
+               title : "Beavers for Every Alaskan",
+               id : "1861".
+               category : "Animals, Education",
+               date : "2015-03-14",
+               tags : "featured",
+               demographic : "Alaska Residents",
+               state : "AK",
+               text : "Let every Alaskan have a beaver so that they may understand the beaver's greatness."
+              }
+             )
+          </code>
+        </p>
       </section>
       <footer>
-        <p>This project is maintained by <a href="https://github.com/SimpleLaw">SimpleLaw</a></p>
+        <p>Created by <a href="https://github.com/mdhuggins">Matthew Huggins</a></p>
         <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
       </footer>
     </div>
     <script src="javascripts/scale.fix.js"></script>
-    
+
   </body>
 </html>
