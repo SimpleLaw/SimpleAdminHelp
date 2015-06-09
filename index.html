@@ -48,7 +48,7 @@
         <p>0. <a href="#connect">Connect to the SimpleLaw server using SSH</a>. <strong>Do not use the online DigitalOcean console, as it does not allow pasting to the command line.</strong></p>
         <p>1. Navigate to <code>~/SimpleLawApp/Simple_Law</code></p>
         <p>2. Execute "<code>meteor mongo</code>" to access the database</p>
-        <p>3. To add a law, replace italics in following template and execute. You should edit the template in a text editor and then paste it into the command line. <strong>Make sure to replace all newlines with &#60;br&#62;.</strong><br><br>
+        <p>3. To add a law, replace italics in following template and execute. You should edit the template in a text editor and then paste it into the command line. <strong>Make sure to replace all newlines with &#60;br&#62;. BE AWARE OF SMART QUOTES! MongoDB doesn't like smart quotes, so be sure there are none by using a <a target="_blank" href="https://www.hochmanconsultants.com/tools/replace-smart-quotes.shtml">smart quote remover</a>.</strong><br><br>
           <code>
             db.laws.insert(
               {
@@ -83,7 +83,7 @@
         <p>0. <a href="#connect">Connect to the SimpleLaw server using SSH</a>. <strong>Do not use the online DigitalOcean console, as it does not allow pasting to the command line.</strong></p>
         <p>1. Navigate to <code>~/SimpleLawApp/Simple_Law</code></p>
         <p>2. Execute "<code>meteor mongo</code>" to access the database</p>
-        <p>3. To find laws in the database, replace italics in following template and execute:<br><br>
+        <p>3. To find laws in the database, replace italics in following template and execute. <strong>BE AWARE OF SMART QUOTES! MongoDB doesn't like smart quotes, so be sure there are none by using a <a target="_blank" href="https://www.hochmanconsultants.com/tools/replace-smart-quotes.shtml">smart quote remover</a>.</strong><br><br>
           <code>
             db.laws.find({<i>record</i> : "<i>value</i>", ...})
           </code><br><br>For Example:<br><br>
