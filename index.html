@@ -20,11 +20,12 @@
         <nav>
           <a href="https://github.com/SimpleLaw/SimpleLawApp/blob/master/HELP.md">Setup</a><br>
           <a href="#connect">Connect</a><br>
-          <a href="#add">Add Laws</a>
+          <a href="#add">Add Laws</a><br>
+          <a href="#find">Find Laws</a>
         </nav>
       </header>
       <section>
-        <h3><a id="connect" class="anchor" href="#connect" aria-hidden="true"><span class="octicon octicon-link"></span></a>Connecting to the SimpleLaw server with SSH</h3>
+        <h2><a id="connect" class="anchor" href="#connect" aria-hidden="true"><span class="octicon octicon-link"></span></a>Connecting to the SimpleLaw server with SSH</h2>
 
         <p><a href="http://en.wikipedia.org/wiki/Secure_Shell">SSH</a> makes it easy to access the SimpleLaw server on your PC. If you use a Unix-like operating system, such as OS X or Linux, you can <a href="https://www.digitalocean.com/community/tutorials/how-to-use-ssh-to-connect-to-a-remote-server-in-ubuntu">easily use SSH</a> from the command line. However, on Microsoft Windows, you will need an SSH client such as <a href="http://www.chiark.greenend.org.uk/~sgtatham/putty/">PuTTY</a>.<br>(<a href="https://www.digitalocean.com/community/tutorials/how-to-log-into-your-droplet-with-putty-for-windows-users">Original tutorial by Etel Sverdlov</a>)</p>
         <p>1. <a href="http://www.chiark.greenend.org.uk/~sgtatham/putty/download.html">Download PuTTY</a></p>
@@ -43,22 +44,22 @@
         </p>
         <p>3. Double click on the session name to connect. After PuTTY starts up, type in the root password. <strong>The password will not be visible, however it is still being entered as you type.</strong></p>
 
-        <h3><a id="add" class="anchor" href="#add" aria-hidden="true"><span class="octicon octicon-link"></span></a>Adding Laws</h3>
+        <h2><a id="add" class="anchor" href="#add" aria-hidden="true"><span class="octicon octicon-link"></span></a>Adding Laws</h2>
         <p>0. <a href="#connect">Connect to the SimpleLaw server using SSH</a>. <strong>Do not use the online DigitalOcean console, as it does not allow pasting to the command line.</strong></p>
         <p>1. Navigate to <code>~/SimpleLawApp/Simple_Law</code></p>
         <p>2. Execute "<code>meteor mongo</code>" to access the database</p>
-        <p>3. To add a law, complete the following template and execute. You should complete the template in a text editor and then paste it into the command line.<br><br>
+        <p>3. To add a law, replace italics in following template and execute. You should edit the template in a text editor and then paste it into the command line.<br><br>
           <code>
             db.laws.insert(
               {
-               title : "LAW TITLE",
-               id : "LAW ID".
-               category : "CATEGORYA, CATEGORYB, ...",
-               date : "YYYY-MM-DD",
-               tags : "TAGA, TAGB, ...",
-               demographic : "DEMOGRAPHIC",
-               state : "STATE",
-               text : "BILL TEXT"
+               title : "<i>LAW TITLE</i>",
+               id : "<i>LAW ID</i>".
+               category : "<i>CATEGORY, ...</i>",
+               date : "<i>YYYY-MM-DD</i>",
+               tags : "<i>TAG, ...</i>",
+               demographic : "<i>DEMOGRAPHIC</i>",
+               state : "<i>STATE</i>",
+               text : "<i>BILL TEXT</i>"
               }
              )
           </code><br><br>For Example:<br><br>
@@ -67,7 +68,7 @@
               {
                title : "Beavers for Every Alaskan",
                id : "1861".
-               category : "Animals, Education",
+               category : "animals, education",
                date : "2015-03-14",
                tags : "featured",
                demographic : "Alaska Residents",
@@ -76,6 +77,25 @@
               }
              )
           </code>
+        </p>
+
+        <h2><a id="find" class="anchor" href="#find" aria-hidden="true"><span class="octicon octicon-link"></span></a>Finding Laws</h2>
+        <p>0. <a href="#connect">Connect to the SimpleLaw server using SSH</a>. <strong>Do not use the online DigitalOcean console, as it does not allow pasting to the command line.</strong></p>
+        <p>1. Navigate to <code>~/SimpleLawApp/Simple_Law</code></p>
+        <p>2. Execute "<code>meteor mongo</code>" to access the database</p>
+        <p>3. To find laws in the database, replace italics in following template and execute:<br><br>
+          <code>
+            db.laws.find({<i>record</i> : "<i>value</i>", ...})
+          </code><br><br>For Example:<br><br>
+          <code>
+            db.laws.find({state : "CT", category : "Education, Disability"})
+          </code>
+        </p>
+        <h3>Using Regular Expression in Queries</h3>
+        <p>
+          Regular expression, commonly abbreviated to regex, allows you to search for records that match a certain pattern, as opposed to simply matching. For example, you could search for all laws that have education as a category, but may have other categories, by executing the following:<br><br>
+          <code>db.laws.find({category : {$regex : ".*" + "education" + ".*"}})</code><br><br>
+          To learn more about using regex with MongoDB, see the <a href="http://docs.mongodb.org/manual/reference/operator/query/regex/" target="_blank">official documentation</a>.
         </p>
       </section>
       <footer>
